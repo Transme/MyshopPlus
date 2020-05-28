@@ -1,0 +1,78 @@
+base:
+  config:
+    nacos:
+      hostname: localhost
+      port: 8848
+    sentile:
+      hostname: localhost
+      port: 8080
+
+spring:
+  application:
+    name: oauth2-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://${base.config.nacos.hostname}:${base.config.nacos.port}
+    sentinel:
+      transport:
+        dashboard: ${base.config.sentile.hostname}:${base.config.sentile.port}
+        port: 8719
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://111.229.156.148:3306/oauth2?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password:  loven123lyw
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  redis:
+    password: 123456
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+    sentinel:
+      master: mymaster-user
+      nodes: lyw166888.xyz:26382, lyw166888.xyz:26383, lyw166888.xyz:26384
+
+dubbo:
+  registry:
+    address: nacos://localhost
+    port: 8848
+  application:
+    name: oauth2-server
+
+feign:
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+  sentinel:
+    enabled: true
+
+server:
+  port: 8400
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+business:
+  oauth2:
+    grant_type: password
+    client_id: client
+    client_secret: secret

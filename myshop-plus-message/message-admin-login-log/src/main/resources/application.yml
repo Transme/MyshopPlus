@@ -1,0 +1,36 @@
+base:
+  config:
+    nacos:
+      hostname: localhost
+      port: 8848
+    rocketmq:
+      hostname: 192.168.230.131
+      port: 9876
+
+spring:
+  application:
+    name: admin-login-log-consumer
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.230.131:9876
+        bindings:
+          admin-login-log-topic: {consumer.orderly: true}
+      bindings:
+        admin-login-log-topic: {destination: admin-login-log-topic, content-type: application/json, group: admin-login-log-group, consumer.maxAttempts: 2}
+
+dubbo:
+  registry:
+    address: nacos://localhost
+    port: 8848
+  scan:
+    base-packages: com.loven.myshop.plus.message.admin.login.log.consumer
+
+server:
+  port: 8700

@@ -1,0 +1,68 @@
+base:
+  config:
+    nacos:
+      hostname: localhost
+      port: 8848
+    sentile:
+      hostname: localhost
+      port: 8080
+
+spring:
+  application:
+    name: admin-login-log-service-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://${base.config.nacos.hostname}:${base.config.nacos.port}
+    sentinel:
+      transport:
+        dashboard: ${base.config.sentile.hostname}:${base.config.sentile.port}
+      enabled: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://111.229.156.148:3306/myshop_admin_login_log?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
+    username: root
+    password: loven123lyw
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+    serialization: kryo
+  registry:
+    address: nacos://localhost
+    port: 8848
+  scan:
+    base-packages: com.loven.myshop.plus.admin.login.log.service.provider
+  application:
+    name: admin-login-log-service-provider
+
+server:
+  port: 8502
+
+mybatis:
+  type-aliases-package: com.loven.admin.service.domain
+  mapper-locations: classpath:mapper/*.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO

@@ -1,0 +1,33 @@
+base:
+  config:
+    oauth:
+      hostname: localhost
+      port: 8400
+    nacos:
+      hostname: localhost
+      port: 8848
+spring:
+  application:
+    name: fastdfs-upload-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://${base.config.nacos.hostname}:${base.config.nacos.port}
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://${base.config.oauth.hostname}:${base.config.oauth.port}/oauth/token
+      user-authorization-uri: http://${base.config.oauth.hostname}:${base.config.oauth.port}/oauth/authorize
+    resource:
+      token-info-uri: http://${base.config.oauth.hostname}:${base.config.oauth.port}/oauth/check_token
+server:
+  port: 8604
+
+fastdfs.base.url: http://f804006.xyz:9021/
+storage:
+  type: fastdfs
+  fastdfs:
+    tracker_server: f804006.xyz
+    tracker_port: 9022

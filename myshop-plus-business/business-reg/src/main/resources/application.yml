@@ -1,0 +1,37 @@
+base:
+  config:
+    nacos:
+      hostname: localhost
+      port: 8848
+    sentile:
+      hostname: localhost
+      port: 8080
+
+spring:
+  application:
+    name: register-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://${base.config.nacos.hostname}:${base.config.nacos.port}
+    sentinel:
+      transport:
+        dashboard: http://${base.config.sentile.hostname}:${base.config.sentile.port}
+
+dubbo:
+  registry:
+    address: nacos://localhost
+    port: 8848
+  application:
+    name: register-server
+
+server:
+  port: 8601
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,51 @@
+base:
+  config:
+    nacos:
+      hostname: localhost
+      port: 8848
+    sentile:
+      hostname: localhost
+      port: 8080
+
+spring:
+  application:
+    name: user-info-server
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://${base.config.nacos.hostname}:${base.config.nacos.port}
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://${oauth2.server}/oauth/token
+      user-authorization-uri: http://${oauth2.server}/oauth/authorize
+    resource:
+      token-info-uri: http://${oauth2.server}/oauth/check_token
+server:
+  port: 8602
+
+dubbo:
+  registry:
+    address: nacos://localhost
+    port: 8848
+  application:
+    name: user-info-server
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+oauth2:
+  server: localhost:8400
