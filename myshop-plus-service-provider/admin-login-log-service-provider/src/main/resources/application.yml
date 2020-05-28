@@ -23,7 +23,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://111.229.156.148:3306/myshop_admin_login_log?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
     username: root
-    password: loven123lyw
+    password: 
     hikari:
       minimum-idle: 5
       idle-timeout: 600000
