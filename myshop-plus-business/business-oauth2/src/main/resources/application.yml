@@ -23,9 +23,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    jdbc-url: jdbc:mysql://111.229.156.148:3306/oauth2?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    jdbc-url: 
     username: root
-    password:  loven123lyw
+    password:  
     hikari:
       minimum-idle: 5
       idle-timeout: 600000
@@ -45,7 +45,7 @@ spring:
         min-idle: 0
     sentinel:
       master: mymaster-user
-      nodes: lyw166888.xyz:26382, lyw166888.xyz:26383, lyw166888.xyz:26384
+      nodes: 
 
 dubbo:
   registry:
