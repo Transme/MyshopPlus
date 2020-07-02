@@ -37,7 +37,7 @@
         <spring-cloud-alibaba.version>2.2.0.RELEASE</spring-cloud-alibaba.version>
         <dubbo-kryo.version>2.7.4.1</dubbo-kryo.version>
         <!-- database setting -->
-        <mysql.version>8.0.15</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <hikaricp.version>3.4.5</hikaricp.version>
         <springboot.starter.mapper.version>2.1.0</springboot.starter.mapper.version>
         <!-- Utils Settings -->
