@@ -42,7 +42,7 @@
         <springboot.starter.mapper.version>2.1.0</springboot.starter.mapper.version>
         <!-- Utils Settings -->
         <google.guava.version>29.0-jre</google.guava.version>
-        <jackson.version>2.10.1</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <lombok.version>1.18.12</lombok.version>
         <hibernate-validate.version>7.0.0.Alpha2</hibernate-validate.version>
         <okhttp.version>4.1.0</okhttp.version>
